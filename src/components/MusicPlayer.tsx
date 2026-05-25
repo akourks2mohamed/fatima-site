@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, ChangeEvent, useCallback } from 'react';
-import { Play, Pause, Volume2, VolumeX, RotateCcw, Disc3 } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Disc3 } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -8,7 +8,11 @@ declare global {
   }
 }
 
-export default function MusicPlayer() {
+interface MusicPlayerProps {
+  isAutoPlay: boolean;
+}
+
+export default function MusicPlayer({ isAutoPlay }: MusicPlayerProps) {
   const [player, setPlayer] = useState<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -17,6 +21,7 @@ export default function MusicPlayer() {
   const [apiReady, setApiReady] = useState(false);
   const playerReadyRef = useRef(false);
   const containerId = "youtube-music-player";
+  const autoPlayDoneRef = useRef(false);
 
   useEffect(() => {
     if (window.YT && window.YT.Player) {
@@ -43,7 +48,6 @@ export default function MusicPlayer() {
 
   useEffect(() => {
     if (!apiReady) return;
-
     const el = document.getElementById(containerId);
     if (!el) return;
 
@@ -53,7 +57,7 @@ export default function MusicPlayer() {
         width: '0',
         videoId: 'qhqJYGn5x5E',
         playerVars: {
-          autoplay: 0,
+          autoplay: 1,
           loop: 1,
           list: 'RDqhqJYGn5x5E',
           listType: 'playlist',
@@ -87,6 +91,27 @@ export default function MusicPlayer() {
       setError(true);
     }
   }, [apiReady]);
+
+  // Auto-play when isAutoPlay becomes true AND player is ready
+  useEffect(() => {
+    if (!isAutoPlay || !player || autoPlayDoneRef.current) return;
+    autoPlayDoneRef.current = true;
+    const tryPlay = () => {
+      try {
+        player.playVideo();
+      } catch {
+        // Browser may block, try on next user gesture
+        const unlockOnce = () => {
+          try { player.playVideo(); } catch {}
+          document.removeEventListener('click', unlockOnce);
+          document.removeEventListener('touchstart', unlockOnce);
+        };
+        document.addEventListener('click', unlockOnce, { once: true });
+        document.addEventListener('touchstart', unlockOnce, { once: true });
+      }
+    };
+    tryPlay();
+  }, [isAutoPlay, player]);
 
   const handlePlayPause = () => {
     if (!player) return;

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Sparkles, Infinity, Gem, Star, Music } from 'lucide-react';
+import { Heart, Sparkles, Infinity, Gem, Star, Music, Image } from 'lucide-react';
 import TimeCounter from './components/TimeCounter';
 import Promises from './components/Promises';
 import Wishes from './components/Wishes';
@@ -11,9 +11,11 @@ import FloatingRoses from './components/FloatingRoses';
 export default function App() {
   const [hasEntered, setHasEntered] = useState(false);
   const [showContent, setShowContent] = useState(false);
+  const [musicAutoPlay, setMusicAutoPlay] = useState(false);
 
   const handleEnter = () => {
     setHasEntered(true);
+    setMusicAutoPlay(true);
     setTimeout(() => setShowContent(true), 800);
   };
 
@@ -99,7 +101,7 @@ export default function App() {
             className="relative z-10"
           >
             {showContent && <MainContent />}
-            <MusicPlayer />
+            <MusicPlayer isAutoPlay={musicAutoPlay} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -175,10 +177,11 @@ function MainContent() {
           <div className="w-56 h-56 md:w-72 md:h-72 rounded-full bg-gradient-to-br from-rose-deep via-rose-pink to-gold p-1 shadow-2xl">
             <div className="w-full h-full rounded-full bg-cream flex items-center justify-center overflow-hidden border-4 border-white">
               <div className="text-center p-6">
-                <Heart className="w-12 h-12 text-rose-pink mx-auto mb-2" />
-                <p className="text-sm text-rose-dark font-medium">صورتنا</p>
-                <p className="text-[10px] text-rose-pink/60 font-mono mt-1">Our Photo</p>
-                <p className="text-[10px] text-rose-pink/40 font-mono mt-2">(أضف صورتك هنا)</p>
+                <Image className="w-14 h-14 text-rose-pink mx-auto mb-3" />
+                <p className="text-base text-rose-dark font-bold font-serif tracking-wide">فاطمة الزهراء</p>
+                <p className="text-[11px] text-rose-pink/70 font-mono mt-1">My Beloved</p>
+                <div className="mt-3 w-12 h-[2px] bg-gradient-to-r from-rose-deep to-rose-pink mx-auto rounded-full"></div>
+                <p className="text-[9px] text-rose-pink/40 font-mono mt-3">ضع صورتكما في src/assets/couple.png</p>
               </div>
             </div>
           </div>
