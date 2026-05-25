@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=JetBrains+Mono:wght@300;400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Kufi Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-cursive: "Great Vibes", cursive;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-rose-light: #fce4ec;
+  --color-rose-soft: #f8bbd0;
+  --color-rose-pink: #f06292;
+  --color-rose-deep: #e91e63;
+  --color-rose-dark: #c2185b;
+  --color-gold: #d4af37;
+  --color-gold-light: #f5e6a3;
+  --color-cream: #fff5f7;
+  --color-charcoal: #2d2d2d;
+  --color-warm-text: #4a3036;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background: linear-gradient(135deg, #fce4ec 0%, #fff0f3 30%, #f8bbd0 70%, #fce4ec 100%);
+  color: var(--color-warm-text);
+  min-height: 100vh;
+}
+
+::selection {
+  background-color: var(--color-rose-deep);
+  color: white;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(8deg); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.15); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  56% { transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes rose-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delayed { animation: float 8s ease-in-out 2s infinite; }
+.animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
