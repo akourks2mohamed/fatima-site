@@ -7,7 +7,7 @@ import Wishes from './components/Wishes';
 import LoveQuotes from './components/LoveQuotes';
 import MusicPlayer from './components/MusicPlayer';
 import FloatingRoses from './components/FloatingRoses';
-
+import coupleImg from './assets/couple.png';
 export default function App() {
   const [hasEntered, setHasEntered] = useState(false);
   const [showContent, setShowContent] = useState(false);
