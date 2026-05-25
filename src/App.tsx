@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Sparkles, Infinity, Gem, Star, Music, Image } from 'lucide-react';
+import { Heart, Sparkles, Infinity, Gem, Star, Music } from 'lucide-react';
 import TimeCounter from './components/TimeCounter';
 import Promises from './components/Promises';
 import Wishes from './components/Wishes';
@@ -176,12 +176,11 @@ function MainContent() {
         <div className="relative group">
           <div className="w-56 h-56 md:w-72 md:h-72 rounded-full bg-gradient-to-br from-rose-deep via-rose-pink to-gold p-1 shadow-2xl">
             <div className="w-full h-full rounded-full bg-cream flex items-center justify-center overflow-hidden border-4 border-white">
-              <div className="text-center p-6">
-                <Image className="w-14 h-14 text-rose-pink mx-auto mb-3" />
-                <p className="text-base text-rose-dark font-bold font-serif tracking-wide">فاطمة الزهراء</p>
-                <p className="text-[11px] text-rose-pink/70 font-mono mt-1">My Beloved</p>
-                <div className="mt-3 w-12 h-[2px] bg-gradient-to-r from-rose-deep to-rose-pink mx-auto rounded-full"></div>
-                <p className="text-[9px] text-rose-pink/40 font-mono mt-3">ضع صورتكما في src/assets/couple.png</p>
+              <div className="w-full h-full relative">
+                <img src={coupleImg} alt="Our Photo" className="w-full h-full object-cover" />
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1">
+                  <p className="text-white text-[10px] font-mono tracking-wider whitespace-nowrap">My Beloved &hearts;</p>
+                </div>
               </div>
             </div>
           </div>
